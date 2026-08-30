@@ -4,8 +4,6 @@ Waiting-room web app for a hair clinic. The patient never sees the paper form. T
 
 Made-up patients only. No login. No admin. Nothing is stored on a server.
 
-Schema contract: [haikustudio.ai/hiring/intake-schema.json](https://haikustudio.ai/hiring/intake-schema.json). Field *names* are not graded; coverage and stored option strings match that JSON.
-
 ## Run
 
 ```bash
@@ -61,34 +59,6 @@ The patient taps through short screens. The last screen is the form from the bri
 | Option lists in `lib/options.ts` | Display labels can be friendly; **saved values match the hiring schema**. |
 
 `clsx`, `framer-motion`, and `tailwind-merge` are in `package.json` from the original scaffold. The UI does not depend on them for the intake flow.
-
-## How I checked the form actually fills
-
-Manual, two made-up patients, phone-width and laptop. After each run I opened the chart and the JSON and checked every schema key.
-
-**Priya (PCOS path)** — Q6–Q7 are asked.
-
-- Age began 28, duration over a year, mother, crown + part line
-- PCOS/PCOD + thyroid → menstrual irregular, pregnancy not applicable
-- Acne yes, extra hair yes, stress in last 6 months
-- No smoking/alcohol, hard water yes, wash alternate days, no heat/salon
-- Oils + topical minoxidil (minoxidil: helped yes, side effects yes) → Q14 already Yes, she only describes itching
-- No procedures, saliva, consent yes
-
-JSON must contain `menstrual_cycle: "Irregular"`, all five product rows (unused `used: false`), all four procedure rows (`done: false`), `past_treatment_side_effects: true` with a description.
-
-**Rohan (skip 6–7)** — “Does not apply” on the periods/pregnancy gate.
-
-- Receding + crown, father, no diagnosed conditions
-- Q6 and Q7 stored as `Not applicable` without ever asking sex
-- Smoking mild, topical minoxidil only, no side effects, Q14 answered No
-- Saliva, consent yes
-
-JSON must contain `menstrual_cycle` and `pregnancy_related` as `Not applicable`, smoking_severity `Mild <5/day`, unused products still present as `used: false`.
-
-Also checked: family `None` cannot sit next to father; conditions `None` cannot sit next to thyroid; Continue stays disabled until the current screen is valid; back from acne after a skip returns to conditions.
-
-I did not add an automated suite in this pass. That is the first item in “one more week.”
 
 ## What I would do with one more week
 
