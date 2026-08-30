@@ -50,7 +50,7 @@ export function QuestionBody({
         <input
           autoFocus
           type="number"
-          min="1"
+          min="10"
           max="99"
           inputMode="numeric"
           value={age}

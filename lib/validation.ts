@@ -17,7 +17,7 @@ export function canContinue(args: {
 
   switch (question) {
     case 0:
-      return Number(age) >= 1 && Number(age) <= 100;
+      return Number(age) >= 10 && Number(age) <= 99;
     case 1:
       return Boolean(data.duration);
     case 2:
